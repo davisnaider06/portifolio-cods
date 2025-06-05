@@ -12,8 +12,7 @@ Bem-vindo ao repositório oficial do **Cods**, um portfólio empresarial criado 
 
 ## ✨ Sobre o projeto
 
-O **Cods** é uma empresa focada em desenvolver **soluções digitais** que ajudam negócios a **vender mais e lucrar mais**. Este portfólio foi criado pa![Captura de tela 2025-06-05 010651](https://github.com/user-attachments/assets/455c3ce0-3ecf-49be-9640-3090123c0871)
-ra apresentar nossos serviços, diferenciais e permitir que novos clientes e parceiros entrem em contato conosco de forma direta e objetiva.
+O **Cods** é uma empresa focada em desenvolver **soluções digitais** que ajudam negócios a **vender mais e lucrar mais**. Este portfólio foi criado para apresentar nossos serviços, diferenciais e permitir que novos clientes e parceiros entrem em contato conosco de forma direta e objetiva.
 
 > **Nosso foco é fazer VOCÊ vender e lucrar mais!** 🚀
 
@@ -76,7 +75,7 @@ Este projeto está licenciado sob a **MIT License** — sinta-se à vontade para
 
 ## 🖼️ Screenshot
 
-![Screenshot do site Cods](./screenshot.png)
+![Captura de tela 2025-06-05 010651](https://github.com/user-attachments/assets/455c3ce0-3ecf-49be-9640-3090123c0871)
 
 ---
 
