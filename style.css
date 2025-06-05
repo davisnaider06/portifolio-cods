@@ -11,7 +11,7 @@
 
 [data-theme="light"] {
     --background-color: #f8f9fa;
-    --text-color: #333333;
+    --text-color: #ffffff;
     --card-bg: #ffffff;
     --highlight-color: #0077b6;
 }
@@ -37,7 +37,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Navbar Moderna */
+
 .navbar {
     position: fixed;
     width: 100%;
@@ -95,7 +95,7 @@ body {
     z-index: 1001;
 }
 
-/* Hero Section Premium */
+
 .hero {
     position: relative;
     min-height: 100vh;
@@ -162,7 +162,10 @@ body {
 .btn-outline {
     background: transparent;
     border: 2px solid var(--highlight-color);
+    border-radius: 10px;
+    padding: 5px;
     color: var(--highlight-color);
+    text-decoration: none;
 }
 
 .btn-outline:hover {
