@@ -11,7 +11,7 @@
 
 [data-theme="light"] {
     --background-color: #f8f9fa;
-    --text-color: #ffffff;
+    --text-color: white;
     --card-bg: #ffffff;
     --highlight-color: #0077b6;
 }
@@ -352,7 +352,7 @@ footer {
     padding-top: 2rem;
 }
 
-/* Cursor Personalizado */
+
 #cursor {
     position: fixed;
     width: 20px;
