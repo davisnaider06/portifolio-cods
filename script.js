@@ -1,68 +1,156 @@
-
-// Alternância de tema
+// Tema Dark/Light
 const themeToggle = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
+const html = document.documentElement;
 
 themeToggle.addEventListener('click', () => {
-  const currentTheme = htmlElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  htmlElement.setAttribute('data-theme', newTheme);
-  
-  // Opcional: Mudar ícone
-  themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('theme', newTheme);
 });
 
-// Filtro de projetos
+// Verificar tema salvo
+const savedTheme = localStorage.getItem('theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+// Menu Mobile
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+});
+
+//fecher menu quando clicar no link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+    });
+});
+
+// efeito Typewriter
+const typewriter = document.getElementById('typewriter');
+const text = "Olá! Somos a Cods";
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        typewriter.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    } else {
+        typewriter.classList.add('blink');
+    }
+}
+
+//iniciar quando carregar a pag
+window.addEventListener('load', typeWriter);
+
+// cursor personalizado
+const cursor = document.getElementById('cursor');
+const cursorLight = document.getElementById('cursor-light');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+    cursorLight.style.left = `${e.clientX}px`;
+    cursorLight.style.top = `${e.clientY}px`;
+});
+
+document.addEventListener('click', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(0.7)';
+    setTimeout(() => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    }, 100);
+});
+
+// filtro de projetos
 const filterButtons = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('.project-card');
 
 filterButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    // Remove classe 'active' de todos
-    filterButtons.forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
+    button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
 
-    const filter = button.getAttribute('data-filter');
+        const filter = button.dataset.filter;
 
-    projectCards.forEach(card => {
-      const tech = card.getAttribute('data-tech');
-
-      if (filter === 'all' || tech.includes(filter)) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
+        projectCards.forEach(card => {
+            const tech = card.dataset.tech;
+            if (filter === 'all' || tech.includes(filter)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
     });
-  });
+});
+
+//AOS
+AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    offset: 100
 });
 
 
-document.addEventListener('mousemove', (e) => {
-  const light = document.getElementById('cursor-light');
-  light.style.left = `${e.clientX}px`;
-  light.style.top = `${e.clientY}px`;
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('particles-js')) {
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ffd5" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#00bfa6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+    }
 });
 
-let mouseX = 0, mouseY = 0;
-let lightX = 0, lightY = 0;
-const speed = 0.1; // Controla a suavidade (0.1 a 0.9)
+// animação gsap
+gsap.registerPlugin(ScrollTrigger);
 
-function animate() {
-  const light = document.getElementById('cursor-light');
-  
-  // Calcula a nova posição com suavização
-  lightX += (mouseX - lightX) * speed;
-  lightY += (mouseY - lightY) * speed;
-  
-  light.style.left = `${lightX}px`;
-  light.style.top = `${lightY}px`;
-  
-  requestAnimationFrame(animate);
-}
-
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+    gsap.from(item, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        delay: i * 0.2
+    });
 });
 
-animate(); // Inicia a animação
+//efeito onda footer
+const wave = document.createElement('div');
+wave.className = 'wave';
+document.body.appendChild(wave);
+
+gsap.to('.wave', {
+    scrollTrigger: {
+        trigger: 'footer',
+        start: "top bottom",
+        scrub: true
+    },
+    scaleX: 1.5,
+    scaleY: 1.2,
+    duration: 2
+});
